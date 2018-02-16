@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpHandler} from '@angular/common/http';
+import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { Viaje } from '../model/Viaje';
 import { Config } from '../util/Config';
@@ -23,6 +23,12 @@ export class ViajeService {
     var header = this.headers;
     header.set("Authorization", "Bearer " + token);
     return this.http.get<Viaje[]>(Config.findViajes(), httpOptions).pipe(catchError(this.handleError('getViajes', [])));
+  }
+
+  getViaje(viaje:number, token: string): Observable<Viaje[]> {
+    var header = this.headers;
+    header.set("Authorization", "Bearer " + token);
+    return this.http.get<Viaje[]>(Config.findViaje(viaje), httpOptions).pipe(catchError(this.handleError('getViaje', [])));
   }
 
   /**

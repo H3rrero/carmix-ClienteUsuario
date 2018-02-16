@@ -1,5 +1,5 @@
 <ul class="search-result">
-  <li *ngFor="let v of viajes" >
-      {{v.id}} - {{v.origen}} - {{v.destino}}
+  <li *ngFor="let v of viajes" (click)="search(v)">
+      {{v.id}} - {{v.origen}} - {{v.destino}} - {{v.precio}} - {{v.plazas}} - {{v.descripcion}} <button>Ver</button>
   </li>
 </ul>

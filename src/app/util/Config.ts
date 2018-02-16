@@ -8,8 +8,13 @@ export class Config {
 
     private static API_URL = Config.PROTOCOL + "://" + Config.SERVER + ":" + Config.PORT;
 
+
+    //LOGIN
+    private static USER = Config.API_URL + "/user"; //Base url
+    public static logIn(){return Config.USER + "/logIn"}
+
     //VIAJE Rest service URLs
-    private static VIAJE = Config.API_URL + "/viaje"; //Base url
+    private static VIAJE = Config.API_URL + "/viajes"; //Base url
 
     public static findViajes(){return Config.VIAJE + "/";}
     public static findViaje(id:number){return Config.VIAJE + "/" + id;}
