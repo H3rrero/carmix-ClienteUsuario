@@ -1,3 +1,6 @@
-<p>
-  dashboard works!
-</p>
+<h1>Mis viajes</h1>
+<ul class="search-result">
+  <li *ngFor="let v of viajes" (click)="search(v)">
+    {{v.id}} - {{v.origen}} - {{v.destino}} - {{v.precio}} - {{v.plazas}} - {{v.descripcion}} <button>Ver</button>
+  </li>
+</ul>

@@ -6,6 +6,7 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 import {User} from "../model/User";
 import {CookieService} from "ngx-cookie-service";
+import {Viaje} from "../model/Viaje";
 
 
 const httpOptions = {
@@ -23,10 +24,18 @@ export class UserService {
   logIn(token: string, user:User): Observable<User> {
     var header = this.headers;
     header.set("Authorization", "Bearer " + token);
-    console.log(Config.logIn());
     return this.http.post<User>(Config.logIn(), user, httpOptions)
       .pipe(catchError(this.handleError<User>('logIn')));
   }
+
+
+  getViajesUsuario(id: string, token: string) {
+    var header = this.headers;
+    header.set("Authorization", "Bearer " + token);
+    return this.http.get<Viaje[]>(Config.getViajesUsuario(id), httpOptions)
+      .pipe(catchError(this.handleError<Viaje[]>('logIn')));
+  }
+
 
   /**
    * Handle Http operation that failed.
@@ -44,5 +53,4 @@ export class UserService {
       return of(result as T);
     };
   }
-
 }

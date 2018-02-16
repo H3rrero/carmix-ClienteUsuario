@@ -25,10 +25,10 @@ export class ViajeService {
     return this.http.get<Viaje[]>(Config.findViajes(), httpOptions).pipe(catchError(this.handleError('getViajes', [])));
   }
 
-  getViaje(viaje:number, token: string): Observable<Viaje[]> {
+  getViaje(viaje:number, token: string): Observable<Viaje> {
     var header = this.headers;
     header.set("Authorization", "Bearer " + token);
-    return this.http.get<Viaje[]>(Config.findViaje(viaje), httpOptions).pipe(catchError(this.handleError('getViaje', [])));
+    return this.http.get<Viaje>(Config.findViaje(viaje), httpOptions).pipe(catchError(this.handleError('getViaje/'+viaje, null)));
   }
 
   /**

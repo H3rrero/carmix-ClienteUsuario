@@ -29,7 +29,7 @@ export class ViajeComponent implements OnInit {
         var token = this.cookieService.get("token");
         return this.viajeService.getViaje(+params['id'], this.cookieService.get("token"));
       })
-      .subscribe((v: Viaje) => {
+      .subscribe(v => {
         this.viaje = v
       });
   }

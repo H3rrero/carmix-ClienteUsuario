@@ -13,9 +13,15 @@ export class Config {
     private static USER = Config.API_URL + "/user"; //Base url
     public static logIn(){return Config.USER + "/logIn"}
 
+    //USUARIO
+    public static getViajesUsuario(id: string) {return Config.USER + "/" +id +"/viajes"}
+
+
     //VIAJE Rest service URLs
     private static VIAJE = Config.API_URL + "/viajes"; //Base url
 
     public static findViajes(){return Config.VIAJE + "/";}
     public static findViaje(id:number){return Config.VIAJE + "/" + id;}
+
+
 }
