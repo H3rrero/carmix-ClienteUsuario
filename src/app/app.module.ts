@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
 import { AppComponent } from './app.component';
 import { ViajesComponent } from './viajes/viajes.component';
 import { AppRoutingModule } from './util/app-routing.module';
@@ -15,7 +14,9 @@ import { HomeComponent } from './home/home.component';
 import {FormsModule} from "@angular/forms";
 import {UserService} from "./service/user.service";
 import { ViajeComponent } from './viaje/viaje.component';
-
+import {DropdownModule} from "primeng/components/dropdown/dropdown";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {DataTableModule} from "primeng/components/datatable/datatable";
 
 @NgModule({
   declarations: [
@@ -28,9 +29,13 @@ import { ViajeComponent } from './viaje/viaje.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+
+    DropdownModule,
+    DataTableModule
   ],
   providers: [
     HttpClient,

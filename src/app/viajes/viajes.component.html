@@ -1,5 +1,21 @@
-<ul class="search-result">
-  <li *ngFor="let v of viajes" (click)="search(v)">
-      {{v.id}} - {{v.origen}} - {{v.destino}} - {{v.precio}} - {{v.plazas}} - {{v.descripcion}} <button>Ver</button>
-  </li>
-</ul>
+<!--<ul class="search-result">-->
+  <!--<li *ngFor="let v of viajes">-->
+      <!--{{v.id}} - {{v.origen}} - {{v.destino}} - {{v.precio}} - {{v.plazas}} - {{v.descripcion}}-->
+    <!--<button class="btn btn-primary" (click)="search(v)">Ver</button>-->
+    <!--<button *ngIf="v.creador != usuario" class="btn btn-primary" (click)="unirse(v)">Unirse</button>-->
+  <!--</li>-->
+<!--</ul>-->
+<p-dataTable [value]="viajes">
+  <p-column field="id" header="ID"></p-column>
+  <p-column field="origen" header="Origen"></p-column>
+  <p-column field="destino" header="Destino"></p-column>
+  <p-column field="precio" header="Precio"></p-column>
+  <p-column field="plazas" header="Plazas"></p-column>
+  <p-column field="descripcion" header="Descripcion"></p-column>
+  <p-column>
+    <ng-template let-v="rowData" let-i="rowIndex" pTemplate="body">
+      <button type="button" pButton (click)="search(v)" class="btn btn-primary">Ver</button>
+      <!--<button *ngIf="v.creador != usuario" class="btn btn-primary" (click)="unirse(v)">Unirse</button>-->
+    </ng-template>
+  </p-column>
+</p-dataTable>

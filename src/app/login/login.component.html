@@ -2,8 +2,7 @@
   <div class="form-group">
     <label for="exampleInputEmail1">Usuario</label>
     <!--<input id="exampleInputEmail1" [(ngModel)]="user.user" placeholder="name">-->
-    <input type="email" class="form-control"
-           id="exampleInputEmail1"
+    <input type="text" class="form-control"
            aria-describedby="emailHelp"
            placeholder="Enter email"
            [(ngModel)]="user.user"
@@ -13,10 +12,38 @@
     <label for="exampleInputPassword1">Contraseña</label>
     <input type="password"
            class="form-control"
-           id="exampleInputPassword1"
            placeholder="Password"
            [(ngModel)]="user.password"
            [ngModelOptions]="{standalone: true}">
   </div>
-  <button type="submit" class="btn btn-primary" (click)="logIn()">Submit</button>
+  <button type="submit" class="btn btn-primary" (click)="logIn()">Iniciar sesión</button>
 </form>
+<br>
+<br>
+<form>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Usuario</label>
+    <!--<input id="exampleInputEmail1" [(ngModel)]="user.user" placeholder="name">-->
+    <input type="email" class="form-control"
+           id="exampleInputEmail1"
+           aria-describedby="emailHelp"
+           placeholder="Enter email"
+           [(ngModel)]="newUser.user"
+           [ngModelOptions]="{standalone: true}">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Contraseña</label>
+    <input type="password"
+           class="form-control"
+           id="exampleInputPassword1"
+           placeholder="Password"
+           [(ngModel)]="newUser.password"
+           [ngModelOptions]="{standalone: true}">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Gustos musicales</label>
+    <p-dropdown [options]="cats" [(ngModel)]="newUser.generoMusical" [ngModelOptions]="{standalone: true}"[style]="{'width':'200px'}"></p-dropdown>
+  </div>
+  <button type="submit" class="btn btn-primary" (click)="register()">Registrar</button>
+</form>
+

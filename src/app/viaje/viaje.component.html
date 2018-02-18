@@ -1,2 +1,29 @@
-<h1>Viaje</h1>
-<p>Origen-Destino: </p> {{viaje.origen}}
+<h2>Viaje {{viaje.id}}</h2>
+<p class="lead">
+  <strong>Origen-Destino: </strong>{{viaje.origen}}</p>
+<p class="lead">
+  <strong>Precio: </strong>{{viaje.precio}}</p>
+<p class="lead">
+  <strong>Plazas: </strong>{{viaje.plazas}}</p>
+<p class="lead">
+  <strong>Descripcion: </strong>{{viaje.descripcion}}</p>
+
+<h3>Usuarios</h3>
+<p-dataTable [value]="viaje.usuarios">
+  <p-column field="id" header="ID"></p-column>
+  <p-column field="user" header="Nombre"></p-column>
+  <p-column field="generoMusical" header="Genero musical"></p-column>
+</p-dataTable>
+<!--<ul>-->
+  <!--<li *ngFor="let u of viaje.usuarios">-->
+    <!--{{u.id}} {{u.user}}-->
+  <!--</li>-->
+<!--</ul>-->
+
+<div *ngIf="viaje.plazas==0">
+  <h3>Lista de reproduccion</h3>
+  {{viaje.lista}}
+</div>
+
+<button type="button" pButton (click)="unirse()" class="btn btn-primary"
+        *ngIf="user != viaje.creador && viaje.plazas > 0 && !registrado">Unirse</button>

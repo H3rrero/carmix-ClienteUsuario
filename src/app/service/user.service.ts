@@ -53,4 +53,11 @@ export class UserService {
       return of(result as T);
     };
   }
+
+  register(token: string, newUser: User) {
+    var header = this.headers;
+    header.set("Authorization", "Bearer " + token);
+    return this.http.post<User>(Config.registerUser(), newUser, httpOptions)
+      .pipe(catchError(this.handleError<User>('logIn')));
+  }
 }

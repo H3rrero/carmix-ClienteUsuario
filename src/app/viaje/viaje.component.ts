@@ -5,6 +5,8 @@ import {ViajeService} from "../service/viaje.service";
 import {Viaje} from "../model/Viaje";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import {forEach} from "@angular/router/src/utils/collection";
+import {User} from "../model/User";
 
 @Component({
   selector: 'app-viaje',
@@ -14,7 +16,8 @@ import 'rxjs/add/operator/switchMap';
 export class ViajeComponent implements OnInit {
 
   viaje: Viaje;
-
+  user:number;
+  registrado:boolean = false;
   constructor(private router: Router,
               private route: ActivatedRoute,
               private viajeService: ViajeService,
@@ -23,6 +26,8 @@ export class ViajeComponent implements OnInit {
   }
 
   ngOnInit() {
+    var userC = this.cookieService.get('user');
+    this.user = Number(userC);
     this.route.params
     // (+) converts string 'id' to a number
       .switchMap((params: Params) => {
@@ -30,8 +35,23 @@ export class ViajeComponent implements OnInit {
         return this.viajeService.getViaje(+params['id'], this.cookieService.get("token"));
       })
       .subscribe(v => {
-        this.viaje = v
+        this.viaje = v;
+        this.viaje.usuarios.forEach(u =>{
+          if(u.id == this.user){
+            this.registrado = true;
+          }
+        });
       });
+  }
+
+  unirse(){
+    var user = new User();
+    user.id = this.user;
+    this.viaje.usuarios.push(user);
+    var token = this.cookieService.get("token");
+    this.viajeService.actualizar(this.viaje,token).subscribe(()=>{
+      this.router.navigate(['/']);
+    });
   }
 
 }

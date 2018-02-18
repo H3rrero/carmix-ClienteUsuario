@@ -5,6 +5,8 @@ import { Viaje } from '../model/Viaje';
 import { Config } from '../util/Config';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
+import {Provincia} from "../model/Provincia";
+import {Categoria} from "../model/Categoria";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,20 +18,6 @@ export class ViajeService {
   constructor(private http: HttpClient) { }
 
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-
-
-
-  getViajes(token: string): Observable<Viaje[]> {
-    var header = this.headers;
-    header.set("Authorization", "Bearer " + token);
-    return this.http.get<Viaje[]>(Config.findViajes(), httpOptions).pipe(catchError(this.handleError('getViajes', [])));
-  }
-
-  getViaje(viaje:number, token: string): Observable<Viaje> {
-    var header = this.headers;
-    header.set("Authorization", "Bearer " + token);
-    return this.http.get<Viaje>(Config.findViaje(viaje), httpOptions).pipe(catchError(this.handleError('getViaje/'+viaje, null)));
-  }
 
   /**
    * Handle Http operation that failed.
@@ -48,4 +36,41 @@ export class ViajeService {
     };
   }
 
+  getViajes(token: string): Observable<Viaje[]> {
+    var header = this.headers;
+    header.set("Authorization", "Bearer " + token);
+    return this.http.get<Viaje[]>(Config.findViajes(), httpOptions).pipe(catchError(this.handleError('getViajes', [])));
+  }
+
+  getViaje(viaje:number, token: string): Observable<Viaje> {
+    var header = this.headers;
+    header.set("Authorization", "Bearer " + token);
+    return this.http.get<Viaje>(Config.findViaje(viaje), httpOptions).pipe(catchError(this.handleError('getViaje/'+viaje, null)));
+  }
+
+
+  getProvincias(token: string): Observable<string[]> {
+    var header = this.headers;
+    header.set("Authorization", "Bearer " + token);
+    return this.http.get<string[]>(Config.getProvincias(), httpOptions).pipe(catchError(this.handleError('provincias/', [])));
+
+  }
+
+  crear(viaje: Viaje, token: string): Observable<Viaje>  {
+    var header = this.headers;
+    header.set("Authorization", "Bearer " + token);
+    return this.http.post<Viaje>(Config.crearViaje(), viaje, httpOptions).pipe(catchError(this.handleError('crearviaje/', null)));
+  }
+
+  actualizar(viaje: Viaje, token: string) {
+    var header = this.headers;
+    header.set("Authorization", "Bearer " + token);
+    return this.http.put(Config.actualizarViaje(), viaje, httpOptions).pipe(catchError(this.handleError('actualizarviaje/', null)));
+  }
+
+  getCategorias(token: string): Observable<Categoria[]> {
+    var header = this.headers;
+    header.set("Authorization", "Bearer " + token);
+    return this.http.get<Categoria[]>(Config.getCategrias(), httpOptions).pipe(catchError(this.handleError('cat/', [])));
+  }
 }

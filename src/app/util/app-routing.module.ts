@@ -16,11 +16,11 @@ const routes = [
      },
      */
     path: '',
+    canActivate: [AuthGuard],
     children: [
       {
         path: '',
         component: HomeComponent,
-        canActivate: [AuthGuard],
         children:[
           {
             path: 'dashboard',
