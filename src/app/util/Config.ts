@@ -23,6 +23,7 @@ export class Config {
 
     public static findViajes(){return Config.VIAJE + "/";}
     public static findViaje(id:number){return Config.VIAJE + "/" + id;}
+    public static findViajePDF(id: number) {return Config.VIAJE + "/" + id + "/pdf";}
     public static getProvincias() {return Config.VIAJE + "/destinos"}
     public static crearViaje() { return Config.VIAJE + "/"}
     public static actualizarViaje() {return Config.VIAJE + "/"}

@@ -16,8 +16,9 @@ import {User} from "../model/User";
 export class ViajeComponent implements OnInit {
 
   viaje: Viaje;
-  user:number;
-  registrado:boolean = false;
+  user: number;
+  registrado: boolean = false;
+
   constructor(private router: Router,
               private route: ActivatedRoute,
               private viajeService: ViajeService,
@@ -36,22 +37,47 @@ export class ViajeComponent implements OnInit {
       })
       .subscribe(v => {
         this.viaje = v;
-        this.viaje.usuarios.forEach(u =>{
-          if(u.id == this.user){
+        this.viaje.usuarios.forEach(u => {
+          if (u.id == this.user) {
             this.registrado = true;
           }
         });
       });
   }
 
-  unirse(){
+  unirse() {
     var user = new User();
     user.id = this.user;
     this.viaje.usuarios.push(user);
     var token = this.cookieService.get("token");
-    this.viajeService.actualizar(this.viaje,token).subscribe(()=>{
+    this.viajeService.actualizar(this.viaje, token).subscribe(() => {
       this.router.navigate(['/']);
     });
+  }
+
+  descargarPDF() {
+
+    this.viajeService.getViajePDF(this.viaje).subscribe(res => {
+      if (res) {
+        var body = res;
+
+        var binaryData = [];
+        binaryData.push(body);
+        var blob = new Blob(binaryData, {type: "application/pdf"});
+        // let saveAs = require('file-saver');
+
+        // saveAs(blob, this.bill.billnumber + '.pdf', true);
+
+
+        var link = document.createElement('a');
+        window.URL = window.URL || (window as any).webkitURL;
+        link.href = window.URL.createObjectURL(blob);
+        link.download = this.viaje.id + ".pdf";
+        link.click();
+      }
+    });
+
+
   }
 
 }

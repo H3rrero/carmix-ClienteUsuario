@@ -24,6 +24,8 @@
   <h3>Lista de reproduccion</h3>
   {{viaje.lista}}
 </div>
+<button type="button" pButton (click)="descargarPDF()" class="btn btn-primary"
+        *ngIf="user == viaje.creador">Descargar PDF</button>
 
 <button type="button" pButton (click)="unirse()" class="btn btn-primary"
         *ngIf="user != viaje.creador && viaje.plazas > 0 && !registrado">Unirse</button>

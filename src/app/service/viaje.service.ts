@@ -7,6 +7,8 @@ import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 import {Provincia} from "../model/Provincia";
 import {Categoria} from "../model/Categoria";
+import {ResponseContentType} from "@angular/http";
+import {headersToString} from "selenium-webdriver/http";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -78,5 +80,9 @@ export class ViajeService {
     var header = this.headers;
     header.set("Authorization", "Bearer " + token);
     return this.http.delete(Config.deleteViaje(v.id), httpOptions).pipe(catchError(this.handleError('deleteViaje')));
+  }
+
+  getViajePDF(v: Viaje): Observable<Object> {
+    return this.http.get(Config.findViajePDF(v.id), {responseType: 'blob'}).pipe(catchError(this.handleError('getViajePDF/', null)));
   }
 }
