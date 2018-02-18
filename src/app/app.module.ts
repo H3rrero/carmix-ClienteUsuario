@@ -17,6 +17,8 @@ import { ViajeComponent } from './viaje/viaje.component';
 import {DropdownModule} from "primeng/components/dropdown/dropdown";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {DataTableModule} from "primeng/components/datatable/datatable";
+import {AuthInterceptor} from "./util/AuthInterceptor";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -42,6 +44,11 @@ import {DataTableModule} from "primeng/components/datatable/datatable";
 
     CookieService,
     AuthGuard,
+    {
+      provide : HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi   : true,
+    },
 
     UserService,
     ViajeService
