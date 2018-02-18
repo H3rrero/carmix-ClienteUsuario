@@ -59,8 +59,20 @@ export class DashboardComponent implements OnInit {
     var token = this.cookieService.get("token");
     this.viaje.creador = Number(creador);
     this.viajeService.crear(this.viaje, token).subscribe(viaje => {
-      // this.viajes.push(viaje);
-      this.viajes = [...this.viajes, viaje];
+      if(viaje != null) {
+        // this.viajes.push(viaje);
+        this.viajes = [...this.viajes, viaje];
+      }
+    });
+  }
+
+  eliminar(v:Viaje){
+    var token = this.cookieService.get("token");
+    this.viajeService.eliminarViaje(v, token).subscribe(() => {
+      var index = this.viajes.indexOf(v);
+      this.viajes.splice(index, 1);
+      this.viajes = [...this.viajes];
+
     });
   }
 }

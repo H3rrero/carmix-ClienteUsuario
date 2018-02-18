@@ -26,7 +26,9 @@ export class Config {
     public static getProvincias() {return Config.VIAJE + "/destinos"}
     public static crearViaje() { return Config.VIAJE + "/"}
     public static actualizarViaje() {return Config.VIAJE + "/"}
+    public static deleteViaje(id:number) {return Config.VIAJE + "/" +id}
 
+    //SPOTIFY
     private static SPOTIFY = Config.API_URL + "/spotify"; //Base url
     public static getCategrias() {return Config.SPOTIFY + "/categorias"}
 

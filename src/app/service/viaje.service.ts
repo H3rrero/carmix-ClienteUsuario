@@ -73,4 +73,10 @@ export class ViajeService {
     header.set("Authorization", "Bearer " + token);
     return this.http.get<Categoria[]>(Config.getCategrias(), httpOptions).pipe(catchError(this.handleError('cat/', [])));
   }
+
+  eliminarViaje(v: Viaje, token: string) {
+    var header = this.headers;
+    header.set("Authorization", "Bearer " + token);
+    return this.http.delete(Config.deleteViaje(v.id), httpOptions).pipe(catchError(this.handleError('deleteViaje')));
+  }
 }
